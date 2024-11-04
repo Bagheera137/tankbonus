@@ -9,7 +9,7 @@ gs=True
 a=0
 wrap.world.create_world(600, 600)
 
-tank1=wrap.sprite.add("battle_city_tanks",200,100,"tank_enemy_size1_green1")
+tank1=wrap.sprite.add("battle_city_tanks",200,100,"tank_player_size1_green1")
 pul = wrap.sprite.add("battle_city_items", -30, rr, "bullet")
 
 wrap.sprite.set_angle(pul,90)
@@ -54,9 +54,23 @@ def bonus():
         star=False
         timebonus=time.time()
         if wrap.sprite.is_collide_sprite(tank1,gs):
-            print("456")
-            a=a+1
-            wrap.sprite_text.set_text(text,str(a))
+            costume()
 
+def costume():
+    global a
+    if a + 1 == 1:
+        wrap.sprite.set_costume(tank1, "tank_player_size2_green1")
+        a = 1
+        wrap.sprite_text.set_text(text, str(a))
+        return
+    if a + 1 == 2:
+        wrap.sprite.set_costume(tank1, "tank_player_size3_green1")
+        a = 2
+        wrap.sprite_text.set_text(text, str(a))
+        return
+    if a + 1 == 3:
+        wrap.sprite.set_costume(tank1, "tank_player_size4_green1")
+        a = 3
+        wrap.sprite_text.set_text(text, str(a))
 
 
