@@ -45,7 +45,8 @@ def bonus():
     global timebonus, star,gs,a
 
     if time.time() - timebonus >= 2 and star==False:
-        gs=wrap.sprite.add("battle_city_items",random.randint(50,550),random.randint(50,550),"block_gift_star")
+        costume=random.choice(["block_gift_star","block_gift_tank"])
+        gs=wrap.sprite.add("battle_city_items",random.randint(50,550),random.randint(50,550),costume)
         timebonus=time.time()
         star=True
     if (time.time() - timebonus>=10 and star==True) or\
@@ -53,24 +54,16 @@ def bonus():
         wrap.sprite.hide(gs)
         star=False
         timebonus=time.time()
-        if wrap.sprite.is_collide_sprite(tank1,gs):
+        if costume=="block_gift_star" and wrap.sprite.is_collide_sprite(tank1,gs):
             costume()
 
 def costume():
     global a
-    if a + 1 == 1:
-        wrap.sprite.set_costume(tank1, "tank_player_size2_green1")
-        a = 1
+    if a<3:
+        a = a+1
+        wrap.sprite.set_costume(tank1,"tank_player_size"+str(a+1)+"_green1")
         wrap.sprite_text.set_text(text, str(a))
-        return
-    if a + 1 == 2:
-        wrap.sprite.set_costume(tank1, "tank_player_size3_green1")
-        a = 2
-        wrap.sprite_text.set_text(text, str(a))
-        return
-    if a + 1 == 3:
-        wrap.sprite.set_costume(tank1, "tank_player_size4_green1")
-        a = 3
-        wrap.sprite_text.set_text(text, str(a))
+
+
 
 
