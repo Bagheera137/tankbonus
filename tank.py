@@ -42,6 +42,7 @@ def pulfly():
         timepulfly=time.time()
         rr=random.randint(50,550)
         wrap.sprite.move_to(pul,-30,rr)
+        wrap.sprite.show(pul)
 @wrap.always()
 def bonus():
     global timebonus, star,gs,a,cost
@@ -75,15 +76,19 @@ def life():
 
 @wrap.always()
 def shot():
-    global a, b
-    if wrap.sprite.is_collide_sprite(tank1,pul) and a>0:
+    global a, b, pul
+    if not wrap.sprite.is_collide_sprite(tank1,pul) or not wrap.sprite.is_visible(pul):
+        return
+    if a>0:
         a=a-1
         wrap.sprite_text.set_text(text, str(a))
         wrap.sprite.set_costume(tank1, "tank_player_size" + str(a + 1) + "_green1")
-        return
-    if a==0 and  wrap.sprite.is_collide_sprite(tank1,pul) and b>0:
+
+    elif a==0 and b>0:
         b = b - 1
         wrap.sprite_text.set_text(text2, str(b))
+
+    wrap.sprite.hide(pul)
 
 
 
